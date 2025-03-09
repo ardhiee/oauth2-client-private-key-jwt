@@ -1,0 +1,49 @@
+spring:
+    application:
+        name: Auth-System
+    security:
+        oauth2:
+            client:
+                registration:
+                    github-idp:
+                        provider: github
+                        client-id: Ov23lizPk0RcwZM8qcIl
+                        client-secret: d99738b26d2616e482e3b146d15bbe50ed3b8e11
+                        #            redirect-uri: "https://ana.acn-mom-inform20-poc.com/login/oauth2/code/github-idp"
+                        scope:
+                            - user:email
+                            - read:user
+                    mockpass-idp:
+                        provider: mockpass
+                        client-id: cognito
+                        scope: openid
+                        client-authentication-method: private_key_jwt
+                        authorization-grant-type: authorization_code
+                        redirect-uri: "http://localhost:8080/login/oauth2/code/mockpass-idp"
+                provider:
+                    mockpass:
+                        authorization-uri: https://5156-opengovsg-mockpass-hq06y0khfjx.ws-us118.gitpod.io/singpass/v2/authorize
+                        token-uri: https://5156-opengovsg-mockpass-hq06y0khfjx.ws-us118.gitpod.io/singpass/v2/token
+                        jwk-set-uri: https://5156-opengovsg-mockpass-hq06y0khfjx.ws-us118.gitpod.io/singpass/v2/.well-known/keys
+                        user-name-attribute: id
+app:
+    host: localhost
+    port: 8080
+    scheme: http
+
+# Server configuration
+server:
+    port: 8080
+
+# Logging configuration
+logging:
+    level:
+        root: INFO
+        org:
+            springframework:
+                web: INFO
+                security: INFO
+                security.oauth2: DEBUG
+        com:
+            example:
+                oauth2client: DEBUG
